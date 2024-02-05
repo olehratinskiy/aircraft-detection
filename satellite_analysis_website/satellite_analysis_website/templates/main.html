@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="main-section">
+    <h1 class="title-font"> Satellite Aviation Data Analysis </h1>
+    <div class="main-types-section">
+        <div class="type-section">
+            <img src="{% static 'images/Group 8.png' %}" class="type-section-img" alt="Description of the image">
+            <p class="type-section-font">Strategic aviation</p>
+        </div>
+        <div class="type-section">
+            <img src="{% static 'images/Group 9.png' %}" class="type-section-img" alt="Description of the image">
+            <p class="type-section-font">Helicopters</p>
+        </div>
+        <div class="type-section">
+            <img src="{% static 'images/Group 10.png' %}" class="type-section-img" alt="Description of the image">
+            <p class="type-section-font">Transport aviation</p>
+        </div>
+        <div class="type-section">
+            <img src="{% static 'images/Group 11.png' %}" class="type-section-img" alt="Description of the image">
+            <p class="type-section-font">Fighters</p>
+        </div>
+    </div>
+    <button id="main-section-btn" onclick="window.location.href='{% url 'login' %}'" type="button">Initiate Analysis</button>
+</div>
+{% endblock content %}

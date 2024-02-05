@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="analysis-section">
+    <div class="tools-section-top">
+        <img id="menu-btn" src="{% static 'images/Group 1.png' %}" alt="Menu button">
+        <div id="menu-tabs">
+            <a href="{% url 'analysis' %}" class="menu-tab">Analysis</a>
+            <a href="{% url 'all_results' %}" class="menu-tab">History</a>
+        </div>
+        <h2 class="tools-section-title">DATA ANALYSIS</h2>
+        <a href="{% url 'logout' %}"><img id="logout-btn" src="{% static 'images/logout.png' %}"
+                                          alt="Logout button"></a>
+    </div>
+    <div class="summary-section-main">
+        <div class="summary-section-main-description">
+            <p class="left-element"><b>{{ result.query_name }}</b></p>
+            <p class="center-element">{{ result.query_time }}</p>
+            <p class="right-element"><b>Download .pdf report</b></p>
+        </div>
+        <table border="1">
+            <tr>
+                <td><b>Image info</b></td>
+                <td><b>Image preview</b></td>
+                <td><b>Result</b></td>
+                <td><b>Accuracy</b></td>
+            </tr>
+            {% for image_data in result.images_data %}
+            <tr>
+                <td>{{ image_data.info.name }}</td>
+                <td class="rowtd">
+                    <img src="data:image/png;base64,{{ image_data.file }}" style="width: 140px">
+                </td>
+                <td class="rowtd">{{ image_data.info.result }}</td>
+                <td class="rowtd">{{ image_data.info.accuracy }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock content %}

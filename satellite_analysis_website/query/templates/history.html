@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="analysis-section">
+    <div class="tools-section-top">
+        <img id="menu-btn" src="{% static 'images/Group 1.png' %}" alt="Menu button">
+        <div id="menu-tabs">
+            <a href="{% url 'analysis' %}" class="menu-tab">Analysis</a>
+            <a href="{% url 'all_results' %}" class="menu-tab">History</a>
+        </div>
+        <h2 class="tools-section-title">HISTORY</h2>
+        <a href="{% url 'logout' %}"><img id="logout-btn" src="{% static 'images/logout.png' %}"
+                                          alt="Logout button"></a>
+    </div>
+    <div class="summary-section-main">
+        <table border="1">
+            <tr>
+                <td><b>ID</b></td>
+                <td><b>Analysis stack name</b></td>
+            </tr>
+            {% for query in queries %}
+            <tr>
+                <td>{{ query.id }}</td>
+                <td>
+                    <a href="{% url 'summary' query_id=query.id %}">{{ query.name }}</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock content %}

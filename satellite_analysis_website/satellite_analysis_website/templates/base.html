@@ -1,0 +1,21 @@
+{% load static %}
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}SADA{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+        <link rel="icon" href="{% static 'images/icologo.jpg' %}" type="image/png">
+    </head>
+    <body>
+        <header class="top-menu">
+            <a href="{% url 'main' %}"  class="top-menu-font">HOME</a>
+            <img src="{% static 'images/logo.png' %}" id="logo-img" alt="Description of the image">
+            <a href="{% url 'login' %}" class="top-menu-font">TOOLS</a>
+        </header>
+        {% block content %} {% endblock content %}
+        <footer>
+            <p class="footer-font">© 2024 Oleh Ratinskiy</p>
+        </footer>
+    </body>
+</html>

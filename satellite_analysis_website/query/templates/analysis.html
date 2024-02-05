@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="analysis-section">
+    <div class="tools-section-top">
+        <img id="menu-btn" src="{% static 'images/Group 1.png' %}" alt="Menu button">
+        <div id="menu-tabs">
+            <a href="{% url 'analysis' %}" class="menu-tab">Analysis</a>
+            <a href="{% url 'all_results' %}" class="menu-tab">History</a>
+        </div>
+        <h2 class="tools-section-title">DATA ANALYSIS</h2>
+        <a href="{% url 'logout' %}"><img id="logout-btn" src="{% static 'images/logout.png' %}"
+                                          alt="Logout button"></a>
+    </div>
+    <form class="analysis-section-main" id="analysis-form" method="post" enctype="multipart/form-data"
+          action="{% url 'analysis_creation' %}">
+        {% csrf_token %}
+        <span>
+            <input id="analysis-section-input" type="text" name="data_identifier" placeholder="Data identifier">
+            <a href="{% url 'analysis_creation' %}"><button id="analysis-section-btn" type="submit">ANALYZE</button></a>
+        </span>
+        <label class="file-input">
+            <input id="images-input" name="images" type="file" accept=".png, .jpg" multiple
+                   onchange="show_list(event)"/>
+            <span id="images-upload-title">Images upload...</span>
+            <ul id="images-list"></ul>
+        </label>
+    </form>
+
+    <script>
+        function show_list(event) {
+            const images_list = document.getElementById("images-list");
+            const images_upload_title = document.getElementById("images-upload-title");
+            images_list.innerHTML = "";
+            const images = document.getElementById('images-input').files;
+
+            for (let i = 0; i < images.length; i++) {
+                const image = document.createElement('li');
+                image.textContent = images[i].name;
+                images_list.appendChild(image);
+            }
+
+            images_upload_title.style.display = 'none';
+        }
+    </script>
+</div>
+{% endblock content %}

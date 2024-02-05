@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<form method="post" action="{% url 'register' %}">
+    {% csrf_token %}
+    <div class="login-section">
+        <img src="{% static 'images/login.png' %}" class="login-img" alt="Description of the image">
+        <h1 class="login-section-font"> MEMBER REGISTER </h1>
+        <input name="username" id="login-section-input-username" class="login-section-input" type="text" placeholder="Username">
+        <input name="password" id="login-section-input-password" class="login-section-input" type="password" placeholder="Password">
+        <button id="login-section-btn">REGISTER</button>
+    </div>
+</form>
+{% endblock content %}
