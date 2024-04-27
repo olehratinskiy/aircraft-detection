@@ -13,23 +13,8 @@ def preprocess_image(img):
     return image
 
 
-# def make_predictions(img):
-#     fractal_model = keras.models.load_model('D:\\diploma\\fractalnet\\fractalnet.h5')
-#
-#     img = img.astype(np.float32)
-#     img /= 255.0
-#
-#     predictions = fractal_model.predict(img)
-#
-#     types = ['attack_helicopters', 'fighter_aircrafts', 'il-76', 'tu-22', 'tu-95', 'tu-160', 'noaircrafts']
-#     aircraft_type = types[int(predictions.argmax(axis=1))]
-#     accuracy = float(np.max(predictions))
-#
-#     return aircraft_type, accuracy
-
-
 def make_predictions(img):
-    fractal_model = keras.models.load_model('D:\\diploma\\fractalnet\\fractalnet.h5')
+    fractal_model = keras.models.load_model('D:\\diploma\\fractalnet\\best-fractalnet.h5')
 
     img_resized = cv2.resize(img, (128, 128))
 
@@ -44,4 +29,3 @@ def make_predictions(img):
     accuracy = float(np.max(predictions))
 
     return aircraft_type, accuracy
-

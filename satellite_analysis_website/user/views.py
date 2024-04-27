@@ -1,10 +1,7 @@
-from django.shortcuts import render
-from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from django.utils import timezone
+from django.contrib.auth.hashers import make_password, check_password
 from .models import User
-from django.shortcuts import render, HttpResponseRedirect
 
 
 def user_login(request):
@@ -17,11 +14,11 @@ def user_login(request):
         password = request.POST.get('password')
 
         try:
-            user = User.objects.filter(username=username).first()
-        except:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
             return HttpResponse('Login failed')
 
-        if user and user.password == password:
+        if user and check_password(password, user.password):
             request.session['user_id'] = user.id
             return HttpResponseRedirect('/analysis')
         else:
@@ -41,8 +38,9 @@ def user_register(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        if username != '' and password != '':
-            user = User.create_user(username, password)
+        if username and password:
+            hashed_password = make_password(password)
+            user = User.objects.create(username=username, password=hashed_password)
             user.save()
             return HttpResponseRedirect('/user/login')
         else:

@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'satellite_analysis_website.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'NAME': 'aircrafts_classification_db',
+        'USER': 'dbuser',
+        'PASSWORD': os.environ.get('db_pass'),
+        'HOST': 'project-database.c5a2gqaaiyze.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }

@@ -48,7 +48,6 @@ def create_analysis(request):
                 aircraft_type, accuracy = make_predictions(updated_img)
                 Image.add_image(name=img.name, result=aircraft_type, accuracy=accuracy, query=query)
 
-                # In future save to S3
                 save_image_to_directory(img.name, updated_img)
 
             return redirect('summary', query_id=query.id)
@@ -59,7 +58,6 @@ def create_analysis(request):
 def get_all_results(request):
     queries = Query.get_all()
     print(queries)
-    if len(queries) > 0:
-        return render(request, 'history.html', {'queries': queries})
+    return render(request, 'history.html', {'queries': queries})
 
-    return redirect('get_analysis_page')
+    # return redirect('analysis')

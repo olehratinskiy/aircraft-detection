@@ -3,7 +3,7 @@
 {% block content %}
 <div class="analysis-section">
     <div class="tools-section-top">
-        <img id="menu-btn" src="{% static 'images/Group 1.png' %}" alt="Menu button">
+        <img id="menu-btn" src="{% static 'images/Group 1.png' %}" alt="Menu button" onclick="show_menu()">
         <div id="menu-tabs">
             <a href="{% url 'analysis' %}" class="menu-tab">Analysis</a>
             <a href="{% url 'all_results' %}" class="menu-tab">History</a>
@@ -28,5 +28,16 @@
             {% endfor %}
         </table>
     </div>
+
+    <script>
+        function show_menu() {
+            const menu = document.getElementById('menu-tabs');
+            if (menu.style.display === 'flex') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'flex';
+            }
+        }
+    </script>
 </div>
 {% endblock content %}
